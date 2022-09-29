@@ -10,6 +10,8 @@ import SignIn from '../components/SignIn.vue';
 import SignUp from '../components/SignUp.vue';
 import GenerateResetLink from '../components/GenerateResetLink.vue'
 import ResetPassword from '../components/ResetPassword.vue'
+import AllUsers from "../components/AllUsers.vue";
+
 import PageNotFound from '../components/PageNotFound.vue';
 const router = new Router({
     mode: 'history',
@@ -59,6 +61,11 @@ const router = new Router({
             path: '/reset/:token',
             component: ResetPassword
         },
+        {
+            name: 'allusers',
+            path: '/users',
+            component: AllUsers
+        },        
         {
             name: 'PageNotFound',
             path: '/*',

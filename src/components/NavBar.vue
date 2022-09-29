@@ -30,6 +30,16 @@
           Products
         </v-btn>
         <v-btn
+          v-if="isUserLoggedIn && isSuperAdmin"
+          depressed
+          text
+          color="blue"
+          :to="{ name: 'allusers' }"
+        >
+          <v-icon left>mdi-account-multiple</v-icon>
+          Manage Users
+        </v-btn>
+        <v-btn
           v-if="!isUserLoggedIn"
           depressed
           text
@@ -141,21 +151,21 @@ export default {
     return {
       sidebar: false,
       appTitle: "GadgetMaster",
-      error:null
+      error: null,
     };
   },
   computed: {
     ...mapGetters(["isUserLoggedIn", "isAdmin", "isSuperAdmin"]),
   },
-  methods:{
-    async handleLogOut(){
-      try{
-        await this.$store.dispatch('logOut');
-      }catch(error){
+  methods: {
+    async handleLogOut() {
+      try {
+        await this.$store.dispatch("logOut");
+      } catch (error) {
         this.error = error;
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
