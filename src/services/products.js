@@ -13,7 +13,8 @@ const getProductsList = async (params) => {
 const createProduct = async (product) => {
     const response = await axios.post('http://localhost:3000/product', product, {
         headers: {
-            authorization: `Bearer ${store.state.token}`
+            authorization: `Bearer ${store.state.token}`,
+            "Content-Type":'multipart/form-data'
         }
     });
     return response.data;

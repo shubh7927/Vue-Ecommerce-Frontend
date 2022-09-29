@@ -2,8 +2,8 @@
   <v-card dark class="mx-auto" max-width="300">
     <v-img
       class="white--text align-end"
-      height="200px"
-      src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
+      height="300px"
+      :src="imgLink"
     >
     </v-img>
 
@@ -37,7 +37,7 @@
 <script>
 export default {
   name: "ProductCard",
-  props: ["price", "name", "category", "productId"],
+  props: ["price", "name", "category", "productId","imgLink"],
 };
 </script>
 

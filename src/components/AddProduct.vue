@@ -37,7 +37,7 @@
               ></v-select>
               <v-textarea
                 filled
-                row="4"
+                row="3"
                 label="Description"
                 v-model="product.description"
                 :rules="[rules.required]"
@@ -49,6 +49,16 @@
                 v-model="product.stock"
                 :rules="[rules.required]"
               ></v-text-field>
+              <v-file-input
+                filled
+                chips
+                prepend-icon=""
+                name="productImage"
+                label="Image"
+                v-model="product.productImage"
+                :rules="[rules.required]"
+              >
+              </v-file-input>
               <v-row>
                 <v-spacer></v-spacer>
                 <v-btn
@@ -97,6 +107,7 @@ export default {
         category: "",
         price: "",
         stock: "",
+        productImage:null
       },
       items: ["Laptop", "Smartphone", "Camera", "Televison", "Accessories"],
       rules: {
@@ -117,7 +128,7 @@ export default {
         if (!this.$refs.form.validate()) {
           return;
         }
-        this.result = await createProduct( this.product);
+        this.result = await createProduct(this.product);
         this.failure = false;
         this.success = true;
         setTimeout(() => {
@@ -137,7 +148,6 @@ export default {
       this.$refs.form.reset();
     },
   },
-  
 };
 </script>
 

@@ -49,6 +49,7 @@
           :price="product.price"
           :category="product.category"
           :productId="product._id"
+          :imgLink="product.image.url"
         />
       </v-col>
     </v-row>
@@ -83,6 +84,7 @@ export default {
   },
   data() {
     return {
+      tempLink:"https://cdn.vuetifyjs.com/images/cards/docks.jpg",
       allProductsList: [],
       productDisplayList: [],
       attrs: {
