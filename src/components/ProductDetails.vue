@@ -44,10 +44,9 @@
           </template>
 
           <v-card>
-            <v-card-title class="text-h5"> Are You Sure? </v-card-title>
-            <v-card-text>
-              Press Ok to delete {{ productDetail.product.name }} or Cancel if
-              it was a mistake.
+            <v-card-title class="text-h5 text-capitalize"> are you sure ? </v-card-title>
+            <v-card-text class="text-capitalize">
+              Press OK if you want to delete {{ productDetail.product.name }}?
             </v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
