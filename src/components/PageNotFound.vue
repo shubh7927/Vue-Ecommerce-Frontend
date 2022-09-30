@@ -104,6 +104,15 @@
       </svg>
     </div>
     <h1>PAGE NOT FOUND</h1>
+    <v-row class="message justify-center my-1 text-h6 text-uppercase">
+      Either the URL you entered is wrong or the page is missing.
+    </v-row>
+    <v-row class="justify-center">
+      <v-btn color="purple" :to="{ name: 'home' }" plain>
+        Go Back to home
+        <v-icon>mdi-arrow-right</v-icon>
+      </v-btn>
+    </v-row>
   </div>
 </template>
 
@@ -159,7 +168,8 @@ export default {
     transform: rotate(8deg);
   }
 }
-h1 {
+h1,
+.message {
   font-family: "Fjalla One";
   text-align: center;
   color: #666;

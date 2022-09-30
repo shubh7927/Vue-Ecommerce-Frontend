@@ -68,7 +68,7 @@ const router = new Router({
         },        
         {
             name: 'PageNotFound',
-            path: '/*',
+            path: '*',
             component: PageNotFound
         },
 

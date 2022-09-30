@@ -12,12 +12,13 @@
           height="400"
         >
         </v-img>
-        <v-row  justify="center" align="center" class="d-flex flex-column my-5">
+        <v-row justify="center" align="center" class="d-flex flex-column my-5">
           <h1>401</h1>
           <h3>The Page You are looking for needs permission.</h3>
           <h3>And It seems you do not have permission.</h3>
 
-          <v-btn class="my-3" color="purple" :to="{name:'home'}" plain>Go back to home
+          <v-btn class="my-3" color="purple" :to="{ name: 'home' }" plain>
+            Go back to home
             <v-icon>mdi-arrow-right</v-icon>
           </v-btn>
         </v-row>
