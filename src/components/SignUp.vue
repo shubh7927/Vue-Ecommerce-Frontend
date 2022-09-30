@@ -153,7 +153,6 @@ export default {
         if (!this.$refs.form.validate()) {
           return;
         }
-        console.log(this.credentials.picture);
         await this.$store.dispatch("signUp", this.credentials);
         this.failure = false;
         this.success = true;

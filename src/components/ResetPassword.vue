@@ -107,12 +107,7 @@ export default {
         this.error = error;
         this.failure = true;
       }
-    },
-    // created() {
-    //   this.token = this.$route.params.token;
-    //   console.log(this.token);
-    //   console.log(this.$route.params.token);
-    // },
+    }
   },
 };
 </script>

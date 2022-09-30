@@ -6,7 +6,6 @@ const signInRequest = async (credentials) => {
     return response.data;
 }
 const signUpRequest = async (credentials) => {
-    console.log(credentials.picture);
     const response = await axios.post('http://localhost:3000/user/signup', credentials, {
         headers: {
             "Content-Type": 'multipart/form-data'
