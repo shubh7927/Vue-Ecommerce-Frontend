@@ -1,70 +1,137 @@
 <template>
-  <div>
-    <v-container style="height: 100vh" v-if="loading">
-      <v-row class="fill-height" align-content="center" justify="center">
-        <v-col cols="6">
-          <v-progress-linear
-            color="deep-purple accent-4"
-            indeterminate
-            rounded
-            height="6"
-          ></v-progress-linear>
+  <v-container style="height: 100vh" v-if="loading">
+    <v-row class="fill-height" align-content="center" justify="center">
+      <v-col cols="6">
+        <v-progress-linear
+          color="deep-purple accent-4"
+          indeterminate
+          rounded
+          height="6"
+        ></v-progress-linear>
+      </v-col>
+    </v-row>
+  </v-container>
+  <v-container v-else-if="product" class="my-4">
+    <template>
+      <v-snackbar v-if="result" v-model="success" tile color="success">
+        <v-icon left>mdi-check-circle</v-icon>
+        {{ result.message }}
+      </v-snackbar>
+      <v-snackbar v-if="error" v-model="failure" tile color="error">
+        <v-icon left>mdi-cancel</v-icon>
+        {{ error.response.data.message }}
+      </v-snackbar>
+    </template>
+    <v-row v-if="isUserLoggedIn && (isAdmin || isSuperAdmin)">
+      <v-spacer></v-spacer>
+      <v-btn
+        outlined
+        class="mx-3"
+        color="success"
+        :to="{ name: 'productUpdate', params: { productId } }"
+      >
+        <v-icon left>mdi-pencil-outline</v-icon>
+        Edit
+      </v-btn>
+
+      <v-dialog v-model="dialog" dark persistent max-width="290">
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn outlined class="mx-3" color="error" v-bind="attrs" v-on="on">
+            Delete
+            <v-icon right>mdi-trash-can-outline</v-icon>
+          </v-btn>
+        </template>
+
+        <v-card>
+          <v-card-title class="text-h5 text-capitalize">
+            are you sure ?
+          </v-card-title>
+          <v-card-text class="text-capitalize">
+            Press OK if you want to delete {{ product.name }}?
+          </v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="grey lighten-1" text @click="dialog = false">
+              Cancel
+            </v-btn>
+            <v-btn color="red darken-1" text @click="deleteProduct"> Ok </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+    </v-row>
+    <v-row align="center">
+      <v-col class="d-flex justify-center">
+        <v-img
+          class="elevation-12 rounded-lg"
+          :src="product.image.url"
+          max-height="350"
+          max-width="350"
+          light
+        >
+        </v-img>
+      </v-col>
+      <v-col>
+        <v-row class="text-sm-h4 text-h5">
+          <v-col class="py-0 py-sm-1">
+            {{ product.name }}
+          </v-col>
+        </v-row>
+        <v-row class="text-sm-h5 text-h6">
+          <v-col class="py-0 py-sm-1">
+            ₹ {{ product.price.toLocaleString() }}
+          </v-col>
+        </v-row>
+        <v-row class="mt-3 mt-sm-4 mb-1 mb-sm-3 justify-start">
+          <v-rating
+            dense
+            half-increments
+            readonly
+            :value="product.rating"
+            color="warning"
+            background-color="warning"
+            class="ml-2"
+          >
+          </v-rating>
+        </v-row>
+        <v-row class="hidden-xs-only justify-start">
+          <v-col class="col-7">
+            <v-btn block dark color="purple" class="elevation-10"
+              >Add to cart</v-btn
+            >
+          </v-col>
+        </v-row>
+        <v-row  class="hidden-sm-and-up justify-center">
+          <v-col class="col-11">
+            <v-btn block dark color="purple" class="elevation-10"
+              >Add to Cart</v-btn
+            >
+          </v-col>
+        </v-row>
+      </v-col>
+    </v-row>
+    <v-divider dark class="mt-5 mb-3"></v-divider>
+    <v-row justify="center">
+      <v-col
+        class="col-10 d-flex justify-center text-h5 text-md-h4 font-weight-bold text-decoration-underline"
+      >
+        Key Specifications
+      </v-col>
+
+      <v-row justify="center">
+        <v-col class="col-11 d-flex flex-column">
+          <div
+            class="my-1 ml-sm-5"
+            justify="center"
+            v-for="(description, idx) in product.description.split('\n')"
+            :key="idx"
+          >
+            <v-icon color="purple">mdi-circle-medium</v-icon>
+            {{ description }}
+          </div>
         </v-col>
       </v-row>
-    </v-container>
-    <v-container v-else-if="productDetail">
-      <template>
-        <v-snackbar v-if="result" v-model="success" tile color="success">
-          <v-icon left>mdi-check-circle</v-icon>
-          {{ result.message }}
-        </v-snackbar>
-        <v-snackbar v-if="error" v-model="failure" tile color="error">
-          <v-icon left>mdi-cancel</v-icon>
-          {{ error.response.data.message }}
-        </v-snackbar>
-      </template>
-      <v-row class="my-4" v-if="isUserLoggedIn && (isAdmin || isSuperAdmin)">
-        <v-spacer></v-spacer>
-        <v-btn
-          outlined
-          class="mx-3"
-          color="success"
-          :to="{ name: 'productUpdate', params: { productId } }"
-        >
-          <v-icon left>mdi-pencil-outline</v-icon>
-          Edit
-        </v-btn>
-
-        <v-dialog v-model="dialog" dark persistent max-width="290">
-          <template v-slot:activator="{ on, attrs }">
-            <v-btn outlined class="mx-3" color="error" v-bind="attrs" v-on="on">
-              Delete
-              <v-icon right>mdi-trash-can-outline</v-icon>
-            </v-btn>
-          </template>
-
-          <v-card>
-            <v-card-title class="text-h5 text-capitalize"> are you sure ? </v-card-title>
-            <v-card-text class="text-capitalize">
-              Press OK if you want to delete {{ productDetail.product.name }}?
-            </v-card-text>
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn color="grey lighten-1" text @click="dialog = false">
-                Cancel
-              </v-btn>
-              <v-btn color="red darken-1" text @click="deleteProduct">
-                Ok
-              </v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-dialog>
-      </v-row>
-      <v-row>
-        {{ productDetail }}
-      </v-row>
-    </v-container>
-  </div>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
@@ -75,7 +142,7 @@ export default {
   data() {
     return {
       productId: null,
-      productDetail: null,
+      product: null,
       loading: false,
       error: null,
       dialog: false,
@@ -109,7 +176,7 @@ export default {
     this.loading = true;
     this.productId = this.$route.params.productId;
     try {
-      this.productDetail = await getSingleProduct(this.productId);
+      this.product = await getSingleProduct(this.productId);
     } catch (error) {
       this.error = error;
       this.failure = true;

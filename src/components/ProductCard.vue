@@ -1,11 +1,6 @@
 <template>
   <v-card dark class="mx-auto" max-width="300">
-    <v-img
-      class="white--text align-end"
-      height="300px"
-      :src="imgLink"
-    >
-    </v-img>
+    <v-img height="300px" :src="imgLink"> </v-img>
 
     <v-card-title>{{ name }}</v-card-title>
 
@@ -37,7 +32,7 @@
 <script>
 export default {
   name: "ProductCard",
-  props: ["price", "name", "category", "productId","imgLink","rating"],
+  props: ["price", "name", "category", "productId", "imgLink", "rating"],
 };
 </script>
 

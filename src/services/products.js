@@ -21,7 +21,7 @@ const createProduct = async (product) => {
 }
 const getSingleProduct = async (productId) => {
     const response = await axios.get(`http://localhost:3000/product/${productId}`);
-    return response.data;
+    return response.data.product;
 }
 const updateSingleProduct = async (productId, product) => {
     const response = await axios.patch(`http://localhost:3000/product/${productId}`, product, {

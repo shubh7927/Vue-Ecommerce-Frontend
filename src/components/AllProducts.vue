@@ -12,10 +12,7 @@
         @keyup="handleSearchResults"
       ></v-text-field>
     </v-row>
-    <v-row
-      class="searchBar mb-4"
-      v-if="isUserLoggedIn && (isAdmin || isSuperAdmin)"
-    >
+    <v-row class="mb-4" v-if="isUserLoggedIn && (isAdmin || isSuperAdmin)">
       <v-spacer></v-spacer>
       <v-btn text color="purple" :to="{ name: 'addProduct' }">
         <v-icon left>mdi-plus</v-icon>
@@ -32,16 +29,11 @@
       </v-col>
     </v-row>
 
-    <v-snackbar v-if="error" v-model="snackbar" color="red" :multi-line="true">
+    <v-snackbar v-if="error" v-model="snackbar" color="red">
       <v-icon left>mdi-alert-circle</v-icon>
       {{ error.message }}
-
-      <template v-slot:action="{ attrs }">
-        <v-btn dark fab text v-bind="attrs" @click="snackbar = false">
-          <v-icon>mdi-window-close</v-icon>
-        </v-btn>
-      </template>
     </v-snackbar>
+    
     <v-row v-if="productDisplayList.length > 0">
       <v-col v-for="product in productDisplayList" :key="product._id">
         <ProductCard
@@ -85,7 +77,7 @@ export default {
   },
   data() {
     return {
-      tempLink:"https://cdn.vuetifyjs.com/images/cards/docks.jpg",
+      tempLink: "https://cdn.vuetifyjs.com/images/cards/docks.jpg",
       allProductsList: [],
       productDisplayList: [],
       attrs: {
