@@ -2,8 +2,15 @@
   <v-footer dark padless>
     <v-card flat tile class="text-center py-5">
       <v-card-text>
-        <v-btn v-for="icon in icons" :key="icon" class="mx-4" dark fab depressed text>
-          <v-icon size="24px">
+        <v-btn
+          v-for="icon in icons"
+          :key="icon"
+          class="mx-4"
+          dark
+          icon
+          color="purple"
+        >
+          <v-icon size="24px" color="purple">
             {{ icon }}
           </v-icon>
         </v-btn>

@@ -25,7 +25,7 @@
       <v-spacer></v-spacer>
 
       <v-toolbar-items class="hidden-sm-and-down">
-        <v-btn depressed text color="blue" :to="{ name: 'allProducts' }">
+        <v-btn depressed text color="purple" :to="{ name: 'allProducts' }">
           <v-icon left>mdi-store</v-icon>
           Products
         </v-btn>
@@ -33,7 +33,7 @@
           v-if="isUserLoggedIn && isSuperAdmin"
           depressed
           text
-          color="blue"
+          color="purple"
           :to="{ name: 'allusers' }"
         >
           <v-icon left>mdi-account-multiple</v-icon>
@@ -43,7 +43,7 @@
           v-if="!isUserLoggedIn"
           depressed
           text
-          color="blue"
+          color="purple"
           :to="{ name: 'signup' }"
         >
           <v-icon left>mdi-account-plus</v-icon>
@@ -53,7 +53,7 @@
           v-if="!isUserLoggedIn"
           depressed
           text
-          color="blue"
+          color="purple"
           :to="{ name: 'signin' }"
         >
           <v-icon left>mdi-login-variant</v-icon>
@@ -97,35 +97,45 @@
       <v-divider></v-divider>
 
       <v-list dense shaped>
-        <v-list-item color="primary" :to="{ name: 'allProducts' }">
+        <v-list-item color="purple" :to="{ name: 'allProducts' }">
           <v-list-item-icon>
-            <v-icon>mdi-store</v-icon>
+            <v-icon color="purple">mdi-store</v-icon>
           </v-list-item-icon>
-          <v-list-item-content class="text-uppercase">
+          <v-list-item-content class="text-uppercase purple--text">
             <v-list-item-title>Products</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
+        <v-list-item color="purple" v-if="isUserLoggedIn && isSuperAdmin" :to="{ name: 'allusers' }">
+          <v-list-item-icon>
+            <v-icon color="purple">mdi-account-multiple</v-icon>
+          </v-list-item-icon>
+          <v-list-item-content class="text-uppercase purple--text">
+            <v-list-item-title>Manage Users</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
         <v-list-item
           v-if="!isUserLoggedIn"
-          color="primary"
+          color="purple"
           :to="{ name: 'signup' }"
         >
           <v-list-item-icon>
-            <v-icon>mdi-account-plus</v-icon>
+            <v-icon color="purple">mdi-account-plus</v-icon>
           </v-list-item-icon>
-          <v-list-item-content class="text-uppercase">
+          <v-list-item-content class="text-uppercase purple--text">
             <v-list-item-title>Sign up</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
+
         <v-list-item
           v-if="!isUserLoggedIn"
-          color="primary"
+          color="purple"
           :to="{ name: 'signin' }"
         >
           <v-list-item-icon>
-            <v-icon>mdi-login-variant</v-icon>
+            <v-icon color="purple">mdi-login-variant</v-icon>
           </v-list-item-icon>
-          <v-list-item-content class="text-uppercase">
+          <v-list-item-content class="text-uppercase purple--text">
             <v-list-item-title>Sign In</v-list-item-title>
           </v-list-item-content>
         </v-list-item>

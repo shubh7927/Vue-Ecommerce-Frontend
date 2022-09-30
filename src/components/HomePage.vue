@@ -7,7 +7,7 @@
           <h1>Best Brands. Best Deals</h1>
           <p>Hot Brands with upto 40% discount</p>
           <p>What Are you Waiting For? Place your order Now.</p>
-          <v-btn outlined color="green" :to="{ name: 'allProducts' }">
+          <v-btn depressed color="purple" :to="{ name: 'allProducts' }">
             Order Now
           </v-btn>
         </div>
@@ -62,10 +62,10 @@
     </section>
 
     <!-- CTA Section -->
-    <v-row class="ctaSection d-flex flex-column align-center py-10 red mt-5">
+    <v-row class="ctaSection d-flex flex-column align-center py-10 purple mt-5">
       <h2 class="sectionHeading">Want a new Gadget?</h2>
       <p>Hurry up!!! Place your order before you miss the deal.</p>
-      <v-btn depressed outlined color="success" :to="{ name: 'allProducts' }">
+      <v-btn depressed outlined color="white" :to="{ name: 'allProducts' }">
         Order Now
       </v-btn>
     </v-row>
