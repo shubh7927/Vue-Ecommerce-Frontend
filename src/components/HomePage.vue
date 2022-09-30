@@ -25,6 +25,7 @@
               :price="product.price"
               :category="product.category"
               :productId="product._id"
+              :imgLink="product.image.url"
             />
           </v-col>
         </v-row>
