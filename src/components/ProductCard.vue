@@ -14,7 +14,7 @@
       dense
       half-increments
       readonly
-      :value="3.5"
+      :value="rating"
       color="warning"
       background-color="warning"
       class="ml-2 mt-0"
@@ -37,7 +37,7 @@
 <script>
 export default {
   name: "ProductCard",
-  props: ["price", "name", "category", "productId","imgLink"],
+  props: ["price", "name", "category", "productId","imgLink","rating"],
 };
 </script>
 
