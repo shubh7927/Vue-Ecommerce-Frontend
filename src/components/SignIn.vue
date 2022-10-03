@@ -49,7 +49,7 @@
                   Forgot Your Password?
                 </router-link>
               </div>
-              <div class="grey--text text-center mt-1 text--darken-5"> OR </div>
+              <div class="grey--text text-center mt-1 text--darken-5">OR</div>
               <div class="grey--text text-center mt-1">
                 Don't have an account? Create Your account
                 <router-link
@@ -111,7 +111,7 @@ export default {
         this.failure = false;
         this.success = true;
         setTimeout(() => {
-          this.$router.push({ name: "home" });
+          this.$router.go(-1);
         }, 2000);
       } catch (error) {
         this.error = error;
@@ -123,5 +123,4 @@ export default {
 </script>
 
 <style scoped>
-
 </style>

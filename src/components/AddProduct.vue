@@ -27,10 +27,8 @@
                 :rules="[rules.required]"
               ></v-text-field>
               <v-select
-                dark
                 filled
                 label="Category"
-                color="rgba(30,31,31,1)"
                 :items="items"
                 v-model="product.category"
                 :rules="[rules.required]"
@@ -107,7 +105,7 @@ export default {
         category: "",
         price: "",
         stock: "",
-        productImage:null
+        productImage: null,
       },
       items: ["Laptop", "Smartphone", "Camera", "Televison", "Accessories"],
       rules: {

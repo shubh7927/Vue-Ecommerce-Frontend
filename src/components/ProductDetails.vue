@@ -95,16 +95,36 @@
         </v-row>
         <v-row class="hidden-xs-only justify-start">
           <v-col class="col-7">
-            <v-btn block dark color="purple" class="elevation-10"
-              >Add to cart</v-btn
+            <v-btn
+              block
+              dark
+              color="purple"
+              class="elevation-10"
+              :disabled="!isUserLoggedIn"
             >
+              <template v-if="isUserLoggedIn">
+                Add to cart
+                <v-icon right>mdi-cart-variant</v-icon>
+              </template>
+              <template v-else> Signin to buy </template>
+            </v-btn>
           </v-col>
         </v-row>
-        <v-row  class="hidden-sm-and-up justify-center">
+        <v-row class="hidden-sm-and-up justify-center">
           <v-col class="col-11">
-            <v-btn block dark color="purple" class="elevation-10"
-              >Add to Cart</v-btn
+            <v-btn
+              block
+              dark
+              color="purple"
+              class="elevation-10"
+              :disabled="!isUserLoggedIn"
             >
+              <template v-if="isUserLoggedIn">
+                Add to cart
+                <v-icon right>mdi-cart-variant</v-icon>
+              </template>
+              <template v-else> Signin to buy </template>
+            </v-btn>
           </v-col>
         </v-row>
       </v-col>
@@ -112,7 +132,14 @@
     <v-divider dark class="mt-5 mb-3"></v-divider>
     <v-row justify="center">
       <v-col
-        class="col-10 d-flex justify-center text-h5 text-md-h4 font-weight-bold text-decoration-underline"
+        class="
+          col-10
+          d-flex
+          justify-center
+          text-h5 text-md-h4
+          font-weight-bold
+          text-decoration-underline
+        "
       >
         Key Specifications
       </v-col>
