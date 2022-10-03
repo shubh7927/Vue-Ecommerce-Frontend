@@ -140,13 +140,14 @@ export default {
     try {
       this.productId = this.$route.params.productId;
       const response = await getSingleProduct(this.productId, this.product);
-      this.product.name = response.product.name;
-      this.product.description = response.product.description;
-      this.product.category = response.product.category;
-      this.product.price = response.product.price;
-      this.product.stock = response.product.stock;
+      this.product.name = response.name;
+      this.product.description = response.description;
+      this.product.category = response.category;
+      this.product.price = response.price;
+      this.product.stock = response.stock;
     } catch (error) {
       this.error = error;
+      console.log(error)
       this.failure = true;
     }
   },
