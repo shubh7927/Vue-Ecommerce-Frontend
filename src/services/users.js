@@ -19,6 +19,7 @@ const updateUserAccess = async (userId, access) => {
     return response.data;
 
 }
+
 const deleteSingleUser = async (userId) => {
     const response = await axios.delete(`http://localhost:3000/user/${userId}`, {
         headers: {
@@ -28,8 +29,44 @@ const deleteSingleUser = async (userId) => {
     return response.data;
 
 }
+
+const viewMyCart = async () => {
+    const response = await axios.get(`http://localhost:3000/user/cart`, {
+        headers: {
+            authorization: `Bearer ${store.state.token}`
+        }
+    })
+    return response.data.cartItems;
+}
+
+const addToCart = async (productId) => {
+    const response = await axios.post(`http://localhost:3000/user/cart`,
+        {
+            product: productId
+        },
+        {
+            headers: {
+                authorization: `Bearer ${store.state.token}`
+            }
+        }
+    )
+    return response.data;
+}
+
+const deleteFromCart = async (productId) => {
+    const response = await axios.delete(`http://localhost:3000/user/cart/${productId}`, {
+        headers: {
+            authorization: `Bearer ${store.state.token}`
+        }
+    });
+    return response.data;
+}
+
 export {
     getAllUsers,
     updateUserAccess,
-    deleteSingleUser
+    deleteSingleUser,
+    viewMyCart,
+    addToCart,
+    deleteFromCart
 }

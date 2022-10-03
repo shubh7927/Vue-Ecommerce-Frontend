@@ -1,9 +1,9 @@
 <template>
-  <v-container style="height: 100vh" v-if="loading">
+  <v-container class="fill-height" v-if="loading">
     <v-row class="fill-height" align-content="center" justify="center">
       <v-col cols="6">
         <v-progress-linear
-          color="deep-purple accent-4"
+          color="purple"
           indeterminate
           rounded
           height="6"
@@ -101,6 +101,7 @@
               color="purple"
               class="elevation-10"
               :disabled="!isUserLoggedIn"
+              @click="addProductToCart"
             >
               <template v-if="isUserLoggedIn">
                 Add to cart
@@ -118,6 +119,7 @@
               color="purple"
               class="elevation-10"
               :disabled="!isUserLoggedIn"
+              @click="addProductToCart"
             >
               <template v-if="isUserLoggedIn">
                 Add to cart
@@ -164,6 +166,7 @@
 <script>
 import { mapGetters } from "vuex";
 import { getSingleProduct, deleteProductById } from "@/services/products.js";
+import { addToCart } from "@/services/users";
 export default {
   name: "ProductDetails",
   data() {
@@ -196,6 +199,17 @@ export default {
         this.failure = true;
       } finally {
         this.dialog = false;
+      }
+    },
+    async addProductToCart() {
+      try {
+        console.log("clicked");
+        this.result = await addToCart(this.productId);
+        this.failure = false;
+        this.success = true;
+      } catch (error) {
+        this.error = error;
+        this.failure = true;
       }
     },
   },
