@@ -1,5 +1,8 @@
 <template>
-  <v-container class="fill-height" v-if="loading">
+  <v-container fluid v-if="!(isUserLoggedIn && (isAdmin || isSuperAdmin))">
+    <UnauthorisedAccess />
+  </v-container>
+  <v-container class="fill-height" v-else-if="loading">
     <v-row class="fill-height" align-content="center" justify="center">
       <v-col cols="4">
         <v-progress-linear
@@ -76,9 +79,13 @@
 </template>
 
 <script>
+import UnauthorisedAccess from "@/components/UnauthorisedAccess.vue";
 import { deleteFromCart, viewMyCart } from "@/services/users.js";
 export default {
   name: "MyCart",
+  components: {
+    UnauthorisedAccess,
+  },
   data() {
     return {
       cartItems: [],

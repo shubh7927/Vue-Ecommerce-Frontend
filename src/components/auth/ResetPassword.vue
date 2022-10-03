@@ -107,7 +107,7 @@ export default {
         this.error = error;
         this.failure = true;
       }
-    }
+    },
   },
 };
 </script>

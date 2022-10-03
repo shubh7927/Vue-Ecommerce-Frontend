@@ -1,9 +1,4 @@
 <template>
-  <!-- <v-row fill-height align="center" justify="center">
-   <v-col>
-     <v-img src="https://cdn.dribbble.com/users/285475/screenshots/2083086/dribbble_1.gif" height="400" width="700"></v-img>
-   </v-col>
-  </v-row> -->
   <v-container fluid fill-height>
     <v-layout align-center justify-center>
       <v-flex xs12 sm12 md8>

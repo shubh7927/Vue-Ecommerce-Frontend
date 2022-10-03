@@ -36,7 +36,7 @@
     </v-layout>
     <v-snackbar v-model="success" tile color="success">
       <v-icon left>mdi-check-circle</v-icon>
-      Email sent to {{email}}
+      Email sent to {{ email }}
     </v-snackbar>
     <v-snackbar v-if="error" v-model="failure" tile color="error">
       <v-icon left>mdi-cancel</v-icon>
@@ -47,18 +47,18 @@
 
 <script>
 import { isEmail } from "validator";
-import { generateResetPasswordLink } from '@/services/auth';
+import { generateResetPasswordLink } from "@/services/auth";
 export default {
   name: "GenerateResetLink",
   data() {
     return {
       valid: true,
-      email:'',
+      email: "",
       rules: {
         required: (value) => !!value || "This Field Is Required",
         email: (value) => {
           return isEmail(value) || "Invalid Email";
-        }
+        },
       },
       success: false,
       failure: false,

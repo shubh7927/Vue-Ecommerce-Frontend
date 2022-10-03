@@ -11,9 +11,11 @@ const store = new Vuex.Store({
         isUserLoggedIn(state) {
             return state.token ? true : false;
         },
+
         isAdmin(state) {
             return state.access === 'admin'
         },
+
         isSuperAdmin(state) {
             return state.access === 'superadmin'
         }
@@ -22,6 +24,7 @@ const store = new Vuex.Store({
         setTokenMutation(state, token) {
             state.token = token;
         },
+
         setAccessMutation(state, access) {
             state.access = access;
         }
@@ -33,8 +36,8 @@ const store = new Vuex.Store({
             context.commit('setTokenMutation', token);
             context.commit('setAccessMutation', access);
             return response;
-
         },
+
         async signUp(context, credentials) {
             const response = await signUpRequest(credentials);
             const { token, access } = response;
@@ -42,14 +45,14 @@ const store = new Vuex.Store({
             context.commit('setAccessMutation', access);
             return response;
         },
-        async logOut(context){
+
+        async logOut(context) {
             const response = await logoutRequest();
-            context.commit('setTokenMutation','');
-            context.commit('setAccessMutation','');
+            context.commit('setTokenMutation', '');
+            context.commit('setAccessMutation', '');
             return response;
         }
     }
-
 })
 
 export default store;

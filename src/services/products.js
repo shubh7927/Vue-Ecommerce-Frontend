@@ -10,6 +10,7 @@ const getProductsList = async (params) => {
     const resultPerPage = response.data.RESULT_PER_PAGE;
     return { allProducts, totalProducts, resultPerPage };
 }
+
 const createProduct = async (product) => {
     const response = await axios.post('http://localhost:3000/product', product, {
         headers: {
@@ -19,10 +20,12 @@ const createProduct = async (product) => {
     });
     return response.data;
 }
+
 const getSingleProduct = async (productId) => {
     const response = await axios.get(`http://localhost:3000/product/${productId}`);
     return response.data.product;
 }
+
 const updateSingleProduct = async (productId, product) => {
     const response = await axios.patch(`http://localhost:3000/product/${productId}`, product, {
         headers: {
@@ -31,6 +34,7 @@ const updateSingleProduct = async (productId, product) => {
     });
     return response.data;
 }
+
 const deleteProductById = async (productId) => {
     const response = await axios.delete(`http://localhost:3000/product/${productId}`, {
         headers: {
@@ -39,6 +43,7 @@ const deleteProductById = async (productId) => {
     });
     return response.data;
 }
+
 export {
     getProductsList,
     createProduct,

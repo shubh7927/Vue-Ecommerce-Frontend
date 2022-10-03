@@ -1,19 +1,21 @@
 import Router from 'vue-router';
 
-import HomePage from '../components/HomePage.vue';
-import AllProducts from '../components/AllProducts.vue';
-import AddProduct from '../components/AddProduct.vue';
-import ProductDetails from '../components/ProductDetails.vue'
-import ProductUpdate from '../components/ProductUpdate.vue';
+import HomePage from '@/components/HomePage.vue';
+import PageNotFound from '@/components/PageNotFound.vue';
 
-import SignIn from '../components/SignIn.vue';
-import SignUp from '../components/SignUp.vue';
-import GenerateResetLink from '../components/GenerateResetLink.vue'
-import ResetPassword from '../components/ResetPassword.vue'
-import MyCart from '../components/MyCart.vue'
-import AllUsers from "../components/AllUsers.vue";
+import AllProducts from '@/components/product/AllProducts.vue';
+import AddProduct from '@/components/product/AddProduct.vue';
+import ProductDetails from '@/components/product/ProductDetails.vue'
+import ProductUpdate from '@/components/product/ProductUpdate.vue';
 
-import PageNotFound from '../components/PageNotFound.vue';
+import SignIn from '@/components/auth/SignIn.vue';
+import SignUp from '@/components/auth/SignUp.vue';
+import GenerateResetLink from '@/components/auth/GenerateResetLink.vue'
+import ResetPassword from '@/components/auth/ResetPassword.vue'
+
+import MyCart from '@/components/user/MyCart.vue'
+import AllUsers from '@/components/user/AllUsers.vue';
+
 const router = new Router({
     mode: 'history',
     routes: [

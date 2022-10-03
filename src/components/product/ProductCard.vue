@@ -4,7 +4,9 @@
 
     <v-card-title>{{ name }}</v-card-title>
 
-    <v-card-subtitle class="pb-0"> ₹{{ price }} </v-card-subtitle>
+    <v-card-subtitle class="pb-0">
+      ₹ {{ price.toLocaleString() }}
+    </v-card-subtitle>
     <v-rating
       dense
       half-increments

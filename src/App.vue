@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <NavBar/>
+    <NavBar />
     <v-main>
       <router-view></router-view>
     </v-main>
@@ -8,29 +8,25 @@
 </template>
 
 <script>
-import NavBar from './components/NavBar.vue';
+import NavBar from "./components/NavBar.vue";
 
 export default {
-  name: 'App',
+  name: "App",
 
   components: {
-    NavBar
+    NavBar,
   },
-
-  data: () => ({
-    //
-  }),
 };
 </script>
-<style >
-main{
+<style>
+main {
   background: rgb(39, 39, 39);
   color: white;
 }
-.sectionHeading{
+.sectionHeading {
   font-family: "Lobster", cursive;
   font-size: 40px;
   text-align: center;
-  margin:20px 0;
+  margin: 20px 0;
 }
 </style>

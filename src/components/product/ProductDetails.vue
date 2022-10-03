@@ -166,7 +166,7 @@
 <script>
 import { mapGetters } from "vuex";
 import { getSingleProduct, deleteProductById } from "@/services/products.js";
-import { addToCart } from "@/services/users";
+import { addToCart } from "@/services/users.js";
 export default {
   name: "ProductDetails",
   data() {

@@ -33,7 +33,7 @@
       <v-icon left>mdi-alert-circle</v-icon>
       {{ error.message }}
     </v-snackbar>
-    
+
     <v-row v-if="productDisplayList.length > 0">
       <v-col v-for="product in productDisplayList" :key="product._id">
         <ProductCard
@@ -69,7 +69,7 @@
 <script>
 import { mapGetters } from "vuex";
 import { getProductsList } from "@/services/products";
-import ProductCard from "./ProductCard.vue";
+import ProductCard from "@/components/product/ProductCard.vue";
 export default {
   name: "AllProducts",
   components: {

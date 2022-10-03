@@ -5,6 +5,7 @@ const signInRequest = async (credentials) => {
     const response = await axios.post('http://localhost:3000/user/signin', credentials);
     return response.data;
 }
+
 const signUpRequest = async (credentials) => {
     const response = await axios.post('http://localhost:3000/user/signup', credentials, {
         headers: {
@@ -13,6 +14,7 @@ const signUpRequest = async (credentials) => {
     });
     return response.data;
 }
+
 const logoutRequest = async () => {
     const response = await axios.get('http://localhost:3000/user/logout', {
         headers: {
@@ -30,9 +32,10 @@ const generateResetPasswordLink = async (email) => {
 }
 
 const resetUserPassword = async (token, credentials) => {
-    const response = await axios.patch(`http://localhost:3000/user/reset/${token}`,credentials);
+    const response = await axios.patch(`http://localhost:3000/user/reset/${token}`, credentials);
     return response.data;
 }
+
 export {
     signInRequest,
     signUpRequest,

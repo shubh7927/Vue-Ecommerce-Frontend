@@ -80,7 +80,7 @@
 <script>
 import { format } from "date-fns";
 import { mapGetters } from "vuex";
-import UnauthorisedAccess from "./UnauthorisedAccess.vue";
+import UnauthorisedAccess from "@/components/UnauthorisedAccess.vue";
 import {
   getAllUsers,
   deleteSingleUser,
@@ -104,7 +104,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(['isUserLoggedIn','isSuperAdmin']),
+    ...mapGetters(["isUserLoggedIn", "isSuperAdmin"]),
   },
   methods: {
     async getUsersList() {

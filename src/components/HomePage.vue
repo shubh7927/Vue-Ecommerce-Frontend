@@ -70,15 +70,15 @@
         Order Now
       </v-btn>
     </v-row>
-    
+
     <PageFooter />
   </main>
 </template> 
 
 <script>
-import { getProductsList } from "../services/products";
-import ProductCard from "./ProductCard.vue";
-import PageFooter from "./PageFooter.vue";
+import { getProductsList } from "@/services/products.js";
+import ProductCard from "@/components/product/ProductCard.vue";
+import PageFooter from "@/components/PageFooter.vue";
 
 export default {
   name: "HomePage",
@@ -125,10 +125,6 @@ export default {
 </script>
 
 <style scoped>
-/* main {
-  background: rgb(30, 30, 30);
-  color: white;
-} */
 .heroText {
   height: 100%;
   display: flex;
