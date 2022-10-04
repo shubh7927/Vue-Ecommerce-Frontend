@@ -2,7 +2,7 @@ import axios from 'axios';
 import store from '@/store/store.js'
 
 const getAllUsers = async () => {
-    const response = await axios.get(`http://localhost:3000/user`, {
+    const response = await axios.get(`${store.state.baseUrl}/user`, {
         headers: {
             authorization: `Bearer ${store.state.token}`
         }
@@ -11,7 +11,7 @@ const getAllUsers = async () => {
 }
 
 const updateUserAccess = async (userId, access) => {
-    const response = await axios.patch(`http://localhost:3000/user/${userId}`, access, {
+    const response = await axios.patch(`${store.state.baseUrl}/user/${userId}`, access, {
         headers: {
             authorization: `Bearer ${store.state.token}`
         }
@@ -21,7 +21,7 @@ const updateUserAccess = async (userId, access) => {
 }
 
 const deleteSingleUser = async (userId) => {
-    const response = await axios.delete(`http://localhost:3000/user/${userId}`, {
+    const response = await axios.delete(`${store.state.baseUrl}/user/${userId}`, {
         headers: {
             authorization: `Bearer ${store.state.token}`
         }
@@ -31,7 +31,7 @@ const deleteSingleUser = async (userId) => {
 }
 
 const viewMyCart = async () => {
-    const response = await axios.get(`http://localhost:3000/user/cart`, {
+    const response = await axios.get(`${store.state.baseUrl}/user/cart`, {
         headers: {
             authorization: `Bearer ${store.state.token}`
         }
@@ -40,7 +40,7 @@ const viewMyCart = async () => {
 }
 
 const addToCart = async (productId) => {
-    const response = await axios.post(`http://localhost:3000/user/cart`,
+    const response = await axios.post(`${store.state.baseUrl}/user/cart`,
         {
             product: productId
         },
@@ -54,7 +54,7 @@ const addToCart = async (productId) => {
 }
 
 const deleteFromCart = async (productId) => {
-    const response = await axios.delete(`http://localhost:3000/user/cart/${productId}`, {
+    const response = await axios.delete(`${store.state.baseUrl}/user/cart/${productId}`, {
         headers: {
             authorization: `Bearer ${store.state.token}`
         }

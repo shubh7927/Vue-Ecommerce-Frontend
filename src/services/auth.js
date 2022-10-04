@@ -2,12 +2,12 @@ import axios from 'axios';
 import store from '@/store/store.js'
 
 const signInRequest = async (credentials) => {
-    const response = await axios.post('http://localhost:3000/user/signin', credentials);
+    const response = await axios.post(`${store.state.baseUrl}/user/signin`, credentials);
     return response.data;
 }
 
 const signUpRequest = async (credentials) => {
-    const response = await axios.post('http://localhost:3000/user/signup', credentials, {
+    const response = await axios.post(`${store.state.baseUrl}/user/signup`, credentials, {
         headers: {
             "Content-Type": 'multipart/form-data'
         }
@@ -16,7 +16,7 @@ const signUpRequest = async (credentials) => {
 }
 
 const logoutRequest = async () => {
-    const response = await axios.get('http://localhost:3000/user/logout', {
+    const response = await axios.get(`${store.state.baseUrl}/user/logout`, {
         headers: {
             authorizarion: `Bearer ${store.state.token}`
         }
@@ -25,14 +25,14 @@ const logoutRequest = async () => {
 }
 
 const generateResetPasswordLink = async (email) => {
-    const response = await axios.post('http://localhost:3000/user/reset', {
+    const response = await axios.post(`${store.state.baseUrl}/user/reset`, {
         email
     });
     return response.data;
 }
 
 const resetUserPassword = async (token, credentials) => {
-    const response = await axios.patch(`http://localhost:3000/user/reset/${token}`, credentials);
+    const response = await axios.patch(`${store.state.baseUrl}/user/reset/${token}`, credentials);
     return response.data;
 }
 

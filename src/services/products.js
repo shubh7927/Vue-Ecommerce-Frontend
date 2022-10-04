@@ -2,7 +2,7 @@ import axios from 'axios';
 import store from '@/store/store.js'
 
 const getProductsList = async (params) => {
-    const response = await axios.get('http://localhost:3000/product', {
+    const response = await axios.get(`${store.state.baseUrl}/product`, {
         params
     });
     const allProducts = response.data.allProducts;
@@ -12,7 +12,7 @@ const getProductsList = async (params) => {
 }
 
 const createProduct = async (product) => {
-    const response = await axios.post('http://localhost:3000/product', product, {
+    const response = await axios.post(`${store.state.baseUrl}/product`, product, {
         headers: {
             authorization: `Bearer ${store.state.token}`,
             "Content-Type":'multipart/form-data'
@@ -22,12 +22,12 @@ const createProduct = async (product) => {
 }
 
 const getSingleProduct = async (productId) => {
-    const response = await axios.get(`http://localhost:3000/product/${productId}`);
+    const response = await axios.get(`${store.state.baseUrl}/product/${productId}`);
     return response.data.product;
 }
 
 const updateSingleProduct = async (productId, product) => {
-    const response = await axios.patch(`http://localhost:3000/product/${productId}`, product, {
+    const response = await axios.patch(`${store.state.baseUrl}/product/${productId}`, product, {
         headers: {
             authorization: `Bearer ${store.state.token}`
         }
@@ -36,7 +36,7 @@ const updateSingleProduct = async (productId, product) => {
 }
 
 const deleteProductById = async (productId) => {
-    const response = await axios.delete(`http://localhost:3000/product/${productId}`, {
+    const response = await axios.delete(`${store.state.baseUrl}/product/${productId}`, {
         headers: {
             authorization: `Bearer ${store.state.token}`
         }

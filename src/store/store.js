@@ -1,11 +1,11 @@
 import Vuex from 'vuex';
 import { logoutRequest, signInRequest, signUpRequest } from '@/services/auth';
 
-
 const store = new Vuex.Store({
     state: {
         token: '',
-        access: ''
+        access: '',
+        baseUrl: process.env.VUE_APP_BASE_URL
     },
     getters: {
         isUserLoggedIn(state) {
