@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid v-if="!(isUserLoggedIn && (isAdmin || isSuperAdmin))">
+  <v-container fluid v-if="!isUserLoggedIn">
     <UnauthorisedAccess />
   </v-container>
   <v-container class="fill-height" v-else-if="loading">
@@ -79,6 +79,7 @@
 </template>
 
 <script>
+import {mapGetters} from "vuex";
 import UnauthorisedAccess from "@/components/UnauthorisedAccess.vue";
 import { deleteFromCart, viewMyCart } from "@/services/users.js";
 export default {
@@ -101,6 +102,7 @@ export default {
       });
       return amount.toLocaleString();
     },
+    ...mapGetters(["isUserLoggedIn"])
   },
   methods: {
     async getCartItems() {
