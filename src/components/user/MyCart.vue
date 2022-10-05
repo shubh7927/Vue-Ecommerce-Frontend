@@ -34,14 +34,8 @@
     </v-row>
   </v-container>
   <v-container v-else>
-    <!-- {{cartItems[0].name}} -->
     <v-row class="my-3"> </v-row>
     <v-row justify="center">
-      <v-col class="col-12 col-sm-7 d-flex justify-end">
-        <v-btn color="purple" dark large tile>
-          Order & Pay ₹ {{ totalAmount }}</v-btn
-        >
-      </v-col>
       <v-col v-for="item in cartItems" :key="item._id" class="col-12 col-sm-7">
         <v-card dark>
           <div class="d-flex flex-no-wrap">
@@ -67,19 +61,24 @@
                   plain
                   @click="removeProductFromCart(item.product._id)"
                 >
-                  Remove From Cart
+                  Remove
                 </v-btn>
               </v-card-actions>
             </div>
           </div>
         </v-card>
       </v-col>
+      <v-col class="col-12 col-sm-7 d-flex justify-center">
+        <v-btn color="purple" dark large tile block>
+          Checkout & Pay ₹ {{ totalAmount }}</v-btn
+        >
+      </v-col>
     </v-row>
   </v-container>
 </template>
 
 <script>
-import {mapGetters} from "vuex";
+import { mapGetters } from "vuex";
 import UnauthorisedAccess from "@/components/UnauthorisedAccess.vue";
 import { deleteFromCart, viewMyCart } from "@/services/users.js";
 export default {
@@ -102,7 +101,7 @@ export default {
       });
       return amount.toLocaleString();
     },
-    ...mapGetters(["isUserLoggedIn"])
+    ...mapGetters(["isUserLoggedIn"]),
   },
   methods: {
     async getCartItems() {
