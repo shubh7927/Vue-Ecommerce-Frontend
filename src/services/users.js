@@ -30,6 +30,15 @@ const deleteSingleUser = async (userId) => {
 
 }
 
+const viewProfile = async () => {
+    const response = await axios.get(`${store.state.baseUrl}/user/profile`, {
+        headers: {
+            authorization: `Bearer ${store.state.token}`
+        }
+    });
+    return response.data.user;
+}
+
 const viewMyCart = async () => {
     const response = await axios.get(`${store.state.baseUrl}/user/cart`, {
         headers: {
@@ -66,6 +75,7 @@ export {
     getAllUsers,
     updateUserAccess,
     deleteSingleUser,
+    viewProfile,
     viewMyCart,
     addToCart,
     deleteFromCart

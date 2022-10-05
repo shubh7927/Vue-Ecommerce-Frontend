@@ -43,7 +43,7 @@
           color="purple"
           :to="{ name: 'allusers' }"
         >
-          <v-icon left>mdi-account-multiple</v-icon>
+          <v-icon left>mdi-account-group</v-icon>
           Manage Users
         </v-btn>
 
@@ -57,6 +57,18 @@
         >
           <v-icon left>mdi-cart</v-icon>
           My Cart
+        </v-btn>
+
+         <!-- MyProfile Link(LoggedIn user only) -->
+        <v-btn
+          v-if="isUserLoggedIn"
+          depressed
+          text
+          color="purple"
+          :to="{ name: 'myProfile' }"
+        >
+          <v-icon left>mdi-account-circle</v-icon>
+          My Profile
         </v-btn>
 
         <!-- SignUp Link(Logged Out User Only) -->
@@ -140,7 +152,7 @@
           :to="{ name: 'allusers' }"
         >
           <v-list-item-icon>
-            <v-icon color="purple">mdi-account-multiple</v-icon>
+            <v-icon color="purple">mdi-account-group</v-icon>
           </v-list-item-icon>
           <v-list-item-content class="text-uppercase purple--text">
             <v-list-item-title>Manage Users</v-list-item-title>
@@ -158,6 +170,20 @@
           </v-list-item-icon>
           <v-list-item-content class="text-uppercase purple--text">
             <v-list-item-title>My Cart</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <!-- MyProfile Link(LoggedIn User Only) -->
+        <v-list-item
+          color="purple"
+          v-if="isUserLoggedIn"
+          :to="{ name: 'myProfile' }"
+        >
+          <v-list-item-icon>
+            <v-icon color="purple">mdi-account-circle</v-icon>
+          </v-list-item-icon>
+          <v-list-item-content class="text-uppercase purple--text">
+            <v-list-item-title>My Profile</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 

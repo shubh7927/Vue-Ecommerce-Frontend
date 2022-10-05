@@ -14,6 +14,7 @@ import GenerateResetLink from '@/components/auth/GenerateResetLink.vue'
 import ResetPassword from '@/components/auth/ResetPassword.vue'
 
 import MyCart from '@/components/user/MyCart.vue'
+import MyProfile from '@/components/user/MyProfile.vue'
 import AllUsers from '@/components/user/AllUsers.vue';
 
 const router = new Router({
@@ -68,6 +69,11 @@ const router = new Router({
             name: 'mycart',
             path: '/cart',
             component: MyCart
+        },
+        {
+            name: 'myProfile',
+            path: '/profile',
+            component: MyProfile
         },
         {
             name: 'allusers',
