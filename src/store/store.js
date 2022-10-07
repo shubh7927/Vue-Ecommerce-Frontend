@@ -5,7 +5,7 @@ const store = new Vuex.Store({
     state: {
         token: '',
         access: '',
-        baseUrl: process.env.VUE_APP_BASE_URL
+        baseUrl: process.env.VUE_APP_BACKEND_BASE_URL
     },
     getters: {
         isUserLoggedIn(state) {
