@@ -34,6 +34,16 @@
     </v-row>
   </v-container>
   <v-container v-else>
+    <template>
+      <v-snackbar v-if="result" v-model="success" tile color="success">
+        <v-icon left>mdi-check-circle</v-icon>
+        {{ result.message }}
+      </v-snackbar>
+      <v-snackbar v-if="error" v-model="failure" tile color="error">
+        <v-icon left>mdi-cancel</v-icon>
+        {{ error.response.data.message }}
+      </v-snackbar>
+    </template>
     <v-row class="my-3"> </v-row>
     <v-row justify="center">
       <v-col v-for="item in cartItems" :key="item._id" class="col-12 col-sm-7">
@@ -69,7 +79,7 @@
         </v-card>
       </v-col>
       <v-col class="col-12 col-sm-7 d-flex justify-center">
-        <v-btn color="purple" dark large tile block>
+        <v-btn color="purple" @click="placeOrder" dark large tile block>
           Checkout & Pay ₹ {{ totalAmount }}</v-btn
         >
       </v-col>
@@ -79,8 +89,9 @@
 
 <script>
 import { mapGetters } from "vuex";
-import UnauthorisedAccess from "@/components/UnauthorisedAccess.vue";
 import { deleteFromCart, viewMyCart } from "@/services/users.js";
+import { placeNewOrder } from "@/services/orders.js";
+import UnauthorisedAccess from "@/components/UnauthorisedAccess.vue";
 export default {
   name: "MyCart",
   components: {
@@ -90,6 +101,9 @@ export default {
     return {
       cartItems: [],
       loading: false,
+      success: false,
+      failure: false,
+      result: null,
       error: null,
     };
   },
@@ -109,10 +123,23 @@ export default {
     },
     async removeProductFromCart(id) {
       try {
-        await deleteFromCart(id);
+        this.result = await deleteFromCart(id);
         await this.getCartItems();
+        this.failure = false;
+        this.success = true;
       } catch (error) {
         this.error = error;
+        this.failure = true;
+      }
+    },
+    async placeOrder() {
+      try {
+        this.result = await placeNewOrder();
+        this.failure = false;
+        this.success = true;
+      } catch (error) {
+        this.error = error;
+        this.failure = true;
       }
     },
   },
