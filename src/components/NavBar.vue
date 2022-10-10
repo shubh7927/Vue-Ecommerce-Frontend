@@ -56,10 +56,22 @@
           :to="{ name: 'mycart' }"
         >
           <v-icon left>mdi-cart</v-icon>
-          My Cart
+          Cart
         </v-btn>
 
-         <!-- MyProfile Link(LoggedIn user only) -->
+        <!-- MyOrders Link(LoggedIn user only) -->
+        <v-btn
+          v-if="isUserLoggedIn"
+          depressed
+          text
+          color="purple"
+          :to="{ name: 'myOrders' }"
+        >
+          <v-icon left>mdi-shopping</v-icon>
+          Orders
+        </v-btn>
+
+        <!-- MyProfile Link(LoggedIn user only) -->
         <v-btn
           v-if="isUserLoggedIn"
           depressed
@@ -68,7 +80,7 @@
           :to="{ name: 'myProfile' }"
         >
           <v-icon left>mdi-account-circle</v-icon>
-          My Profile
+          Profile
         </v-btn>
 
         <!-- SignUp Link(Logged Out User Only) -->
@@ -169,7 +181,21 @@
             <v-icon color="purple">mdi-cart</v-icon>
           </v-list-item-icon>
           <v-list-item-content class="text-uppercase purple--text">
-            <v-list-item-title>My Cart</v-list-item-title>
+            <v-list-item-title>Cart</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <!-- MyOrders Link(LoggedIn user only) -->
+        <v-list-item
+          color="purple"
+          v-if="isUserLoggedIn"
+          :to="{ name: 'myOrders' }"
+        >
+          <v-list-item-icon>
+            <v-icon color="purple">mdi-shopping</v-icon>
+          </v-list-item-icon>
+          <v-list-item-content class="text-uppercase purple--text">
+            <v-list-item-title>Orders</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
@@ -183,7 +209,7 @@
             <v-icon color="purple">mdi-account-circle</v-icon>
           </v-list-item-icon>
           <v-list-item-content class="text-uppercase purple--text">
-            <v-list-item-title>My Profile</v-list-item-title>
+            <v-list-item-title>Profile</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 

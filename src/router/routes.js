@@ -15,6 +15,7 @@ import ResetPassword from '@/components/auth/ResetPassword.vue'
 
 import MyCart from '@/components/user/MyCart.vue'
 import MyProfile from '@/components/user/MyProfile.vue'
+import MyOrders from '@/components/user/MyOrders.vue'
 import AllUsers from '@/components/user/AllUsers.vue';
 
 const router = new Router({
@@ -74,6 +75,11 @@ const router = new Router({
             name: 'myProfile',
             path: '/profile',
             component: MyProfile
+        },
+        {
+            name: 'myOrders',
+            path: '/orders',
+            component: MyOrders
         },
         {
             name: 'allusers',
