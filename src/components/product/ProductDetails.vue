@@ -203,7 +203,6 @@ export default {
     },
     async addProductToCart() {
       try {
-        console.log("clicked");
         this.result = await addToCart(this.productId);
         this.failure = false;
         this.success = true;

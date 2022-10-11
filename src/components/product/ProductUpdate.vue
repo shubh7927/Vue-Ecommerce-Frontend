@@ -147,7 +147,6 @@ export default {
       this.product.stock = response.stock;
     } catch (error) {
       this.error = error;
-      console.log(error);
       this.failure = true;
     }
   },
