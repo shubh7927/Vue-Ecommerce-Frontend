@@ -10,6 +10,40 @@ const placeNewOrder = async () => {
     return response.data;
 }
 
-export{
-    placeNewOrder
+const viewMyOrders = async () => {
+    const response = await axios.get(`${store.state.baseUrl}/order/myorders`, {
+        headers: {
+            authorization: `Bearer ${store.state.token}`
+        }
+    });
+    return response.data;
+}
+
+const getAllOrders = async () => {
+    const response = await axios.get(`${store.state.baseUrl}/order`, {
+        headers: {
+            authorization: `Bearer ${store.state.token}`
+        }
+    });
+    return response.data;
+}
+
+const setOrderStatus = async (newStatus, orderId, productId) => {
+    const response = await axios.patch(`${store.state.baseUrl}/order/update`, { newStatus }, {
+        params: {
+            oid: `${orderId}`,
+            pid: `${productId}`
+        },
+        headers: {
+            authorization: `Bearer ${store.state.token}`
+        }
+    });
+    return response.data;
+}
+
+export {
+    placeNewOrder,
+    viewMyOrders,
+    getAllOrders,
+    setOrderStatus
 }

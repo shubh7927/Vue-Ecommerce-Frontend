@@ -17,6 +17,7 @@ import MyCart from '@/components/user/MyCart.vue'
 import MyProfile from '@/components/user/MyProfile.vue'
 import MyOrders from '@/components/user/MyOrders.vue'
 import AllUsers from '@/components/user/AllUsers.vue';
+import AllOrders from '@/components/user/AllOrders.vue';
 
 const router = new Router({
     mode: 'history',
@@ -85,6 +86,11 @@ const router = new Router({
             name: 'allusers',
             path: '/users',
             component: AllUsers
+        },
+        {
+            name: 'allOrders',
+            path: '/allorders',
+            component: AllOrders
         },
         {
             name: 'PageNotFound',

@@ -46,6 +46,18 @@
           <v-icon left>mdi-account-group</v-icon>
           Manage Users
         </v-btn>
+        
+        <!-- ManageAllOrders Link(SuperAdmin Only) -->
+        <v-btn
+          v-if="isUserLoggedIn && isSuperAdmin"
+          depressed
+          text
+          color="purple"
+          :to="{ name: 'allOrders' }"
+        >
+          <v-icon left>mdi-package-variant-closed</v-icon>
+          Manage Orders
+        </v-btn>
 
         <!-- MyCart Link(LoggedIn user only) -->
         <v-btn
@@ -168,6 +180,20 @@
           </v-list-item-icon>
           <v-list-item-content class="text-uppercase purple--text">
             <v-list-item-title>Manage Users</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <!-- ManageAllOrders Link(SuperAdmin only) -->
+        <v-list-item
+          color="purple"
+          v-if="isUserLoggedIn && isSuperAdmin"
+          :to="{ name: 'allOrders' }"
+        >
+          <v-list-item-icon>
+            <v-icon color="purple">mdi-package-variant-closed</v-icon>
+          </v-list-item-icon>
+          <v-list-item-content class="text-uppercase purple--text">
+            <v-list-item-title>Manage Orders</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
