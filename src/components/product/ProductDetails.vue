@@ -1,4 +1,5 @@
 <template>
+  <!-- Loader -->
   <v-container class="fill-height" v-if="loading">
     <v-row class="fill-height" align-content="center" justify="center">
       <v-col cols="6">
@@ -11,7 +12,10 @@
       </v-col>
     </v-row>
   </v-container>
+
+  <!-- ProductDetails Page -->
   <v-container v-else-if="product" class="my-4">
+    <!-- Notifications -->
     <template>
       <v-snackbar v-if="result" v-model="success" tile color="success">
         <v-icon left>mdi-check-circle</v-icon>
@@ -22,6 +26,8 @@
         {{ error.response.data.message }}
       </v-snackbar>
     </template>
+
+    <!-- Edit And Delete Product Buttons (Admin and SuperAdmin only) -->
     <v-row v-if="isUserLoggedIn && (isAdmin || isSuperAdmin)">
       <v-spacer></v-spacer>
       <v-btn
@@ -59,10 +65,13 @@
         </v-card>
       </v-dialog>
     </v-row>
+
+    <!-- Product Details -->
     <v-row align="center">
+      <!-- Product Image -->
       <v-col class="d-flex justify-center">
         <v-img
-          class="elevation-12 rounded-lg"
+          class="elevation-12 rounded"
           :src="product.image.url"
           max-height="350"
           max-width="350"
@@ -70,17 +79,23 @@
         >
         </v-img>
       </v-col>
+
       <v-col>
+        <!-- Product Name -->
         <v-row class="text-sm-h4 text-h5">
           <v-col class="py-0 py-sm-1">
             {{ product.name }}
           </v-col>
         </v-row>
+
+        <!-- Product Price -->
         <v-row class="text-sm-h5 text-h6">
           <v-col class="py-0 py-sm-1">
             ₹ {{ product.price.toLocaleString() }}
           </v-col>
         </v-row>
+
+        <!-- Product Rating -->
         <v-row class="mt-3 mt-sm-4 mb-1 mb-sm-3 justify-start">
           <v-rating
             dense
@@ -93,6 +108,8 @@
           >
           </v-rating>
         </v-row>
+
+        <!-- AddToCart Button(Not for phones)  -->
         <v-row class="hidden-xs-only justify-start">
           <v-col class="col-7">
             <v-btn
@@ -111,6 +128,8 @@
             </v-btn>
           </v-col>
         </v-row>
+
+        <!-- AddToCart Button(Only for phones)  -->
         <v-row class="hidden-sm-and-up justify-center">
           <v-col class="col-11">
             <v-btn
@@ -131,7 +150,11 @@
         </v-row>
       </v-col>
     </v-row>
+
+    <!-- Divider(Horizontal Line) -->
     <v-divider dark class="mt-5 mb-3"></v-divider>
+
+    <!-- Key Specifications Section -->
     <v-row justify="center">
       <v-col
         class="

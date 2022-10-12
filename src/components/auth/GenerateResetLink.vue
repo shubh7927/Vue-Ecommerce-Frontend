@@ -1,10 +1,21 @@
 <template>
-  <v-container fluid fill-height>
+  <!-- UnauthorisedAccess if User is already Logged in -->
+  <v-container v-if="isUserLoggedIn">
+    <UnauthorisedAccess />
+  </v-container>
+
+  <!-- Form If User is not logged in -->
+  <v-container v-else fluid fill-height>
     <v-layout align-center justify-center>
       <v-flex xs12 sm8 md4>
-        <v-card class="elevation-12 py-5 px-5" dark>
+        <v-card class="elevation-12 py-5 px-5 text-center" dark>
+          <v-card-text class="text-h5 white--text">
+            Confirm Your Email
+          </v-card-text>
           <v-card-text>
+            <!-- Form -->
             <v-form @submit.prevent="generateLink" ref="form" v-model="valid">
+              <!-- Email Field -->
               <v-text-field
                 v-model="email"
                 prepend-inner-icon="mdi-email"
@@ -13,27 +24,30 @@
                 type="email"
                 color="primary"
                 autocomplete="off"
+                :success="rules.email(email) == true"
                 :rules="[rules.required, rules.email]"
                 outlined
-                validate-on-blur
               ></v-text-field>
 
+              <!-- Generate Resest Password Link -->
               <v-btn
                 type="submit"
-                color="success"
+                color="purple"
                 :disabled="!valid"
                 block
                 depressed
                 large
                 rounded
               >
-                Generate Link
+                Get Reset Password Link
               </v-btn>
             </v-form>
           </v-card-text>
         </v-card>
       </v-flex>
     </v-layout>
+
+    <!-- Notification -->
     <v-snackbar v-model="success" tile color="success">
       <v-icon left>mdi-check-circle</v-icon>
       Email sent to {{ email }}
@@ -48,8 +62,12 @@
 <script>
 import { isEmail } from "validator";
 import { generateResetPasswordLink } from "@/services/auth";
+import UnauthorisedAccess from "@/components/UnauthorisedAccess.vue";
 export default {
   name: "GenerateResetLink",
+  components: {
+    UnauthorisedAccess,
+  },
   data() {
     return {
       valid: true,
@@ -75,9 +93,6 @@ export default {
         await generateResetPasswordLink(this.email);
         this.failure = false;
         this.success = true;
-        setTimeout(() => {
-          this.$router.push({ name: "signin" });
-        }, 2000);
       } catch (error) {
         this.error = error;
         this.failure = true;

@@ -1,10 +1,20 @@
 <template>
-  <v-container fluid fill-height>
+  <!-- UnauthorisedAccess if User is already Logged in -->
+  <v-container v-if="isUserLoggedIn">
+    <UnauthorisedAccess />
+  </v-container>
+
+  <!-- Form If User is not logged in -->
+  <v-container v-else fluid fill-height>
     <v-layout align-center justify-center>
       <v-flex xs12 sm8 md4>
         <v-card class="elevation-12 py-5 px-5" dark>
           <v-card-text>
+
+            <!-- Form -->
             <v-form @submit.prevent="resetPassword" ref="form" v-model="valid">
+
+              <!-- New Password Field -->
               <v-text-field
                 v-model="credentials.password"
                 prepend-inner-icon="mdi-lock"
@@ -20,6 +30,8 @@
                 "
                 validate-on-blur
               ></v-text-field>
+
+              <!-- Confirm Password Field -->
               <v-text-field
                 v-model="credentials.confirmPassword"
                 prepend-inner-icon="mdi-lock"
@@ -36,9 +48,11 @@
                 "
                 outlined
               ></v-text-field>
+
+              <!-- Reset Password Button -->
               <v-btn
                 type="submit"
-                color="success"
+                color="purple"
                 :disabled="!valid"
                 block
                 depressed
@@ -52,6 +66,8 @@
         </v-card>
       </v-flex>
     </v-layout>
+
+    <!-- Notification -->
     <v-snackbar v-model="success" tile color="success">
       <v-icon left>mdi-check-circle</v-icon>
       Password Updated Successfully.
@@ -60,14 +76,19 @@
       <v-icon left>mdi-cancel</v-icon>
       {{ error.response.data.message }}
     </v-snackbar>
+    
   </v-container>
 </template>
 
 <script>
 import { isStrongPassword } from "validator";
 import { resetUserPassword } from "@/services/auth";
+import UnauthorisedAccess from "@/components/UnauthorisedAccess.vue";
 export default {
   name: "ResetPassword",
+  components: {
+    UnauthorisedAccess,
+  },
   data() {
     return {
       valid: false,

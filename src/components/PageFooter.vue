@@ -3,31 +3,31 @@
     <v-card flat tile class="text-center py-5">
       <v-card-text>
         <v-btn
-          v-for="icon in icons"
-          :key="icon"
+          v-for="link in links"
+          :href="link.address"
+          target="_blank"
+          :key="link.address"
           class="mx-4"
           dark
           icon
           color="purple"
         >
           <v-icon size="24px" color="purple">
-            {{ icon }}
+            {{ link.icon }}
           </v-icon>
         </v-btn>
       </v-card-text>
 
       <v-card-text class="pt-0">
-        Phasellus feugiat arcu sapien, et iaculis ipsum elementum sit amet.
-        Mauris cursus commodo interdum. Praesent ut risus eget metus luctus
-        accumsan id ultrices nunc. Sed at orci sed massa consectetur dignissim a
-        sit amet dui. Duis commodo vitae velit et faucibus. Morbi vehicula
-        lacinia malesuada. Nulla placerat augue vel ipsum ultrices, cursus
-        iaculis dui sollicitudin. Vestibulum eu ipsum vel diam elementum tempor
-        vel ut orci. Orci varius natoque penatibus et magnis dis parturient
-        montes, nascetur ridiculus mus.
+        Fynd Academy is an accelerated learning program for freshers and
+        experienced professionals to build their skills and meaningfully
+        contribute at work from Day One. Fynd Academy sets up its students on a
+        lifelong growth path. Learn what our Trainees dream and work towards,
+        and prepare to start your programming career with the best.
       </v-card-text>
 
-      <v-card-text class="">
+      <v-card-text>
+        <v-icon small>mdi-copyright</v-icon>
         {{ new Date().getFullYear() }} — <strong>Fynd Academy</strong>
       </v-card-text>
     </v-card>
@@ -39,7 +39,20 @@ export default {
   name: "PageFooter",
   data() {
     return {
-      icons: ["mdi-facebook", "mdi-twitter", "mdi-linkedin", "mdi-instagram"],
+      links: [
+        {
+          icon: "mdi-instagram",
+          address: "https://www.instagram.com/p/Ch1SNfPgX9W/",
+        },
+        {
+          icon: "mdi-twitter",
+          address: "https://twitter.com/AcademyFynd",
+        },
+        {
+          icon: "mdi-linkedin",
+          address: "https://www.linkedin.com/showcase/82146162/",
+        },
+      ],
     };
   },
 };

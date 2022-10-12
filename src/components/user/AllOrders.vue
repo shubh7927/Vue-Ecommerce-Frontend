@@ -1,7 +1,10 @@
 <template>
+  <!-- UnauthorisedAccess for Normal users and Admin -->
   <v-container v-if="!isUserLoggedIn">
-    <UnauthorisedAccess></UnauthorisedAccess>
+    <UnauthorisedAccess />
   </v-container>
+
+  <!-- Loader -->
   <v-container class="fill-height" v-else-if="loading">
     <v-row class="fill-height" align-content="center" justify="center">
       <v-col cols="4">
@@ -14,10 +17,15 @@
       </v-col>
     </v-row>
   </v-container>
+
+  <!-- No order found -->
   <v-container class="fill-height" v-else-if="allOrders.length == 0">
     <v-row align="center" class="flex-column"> No Orders Placed </v-row>
   </v-container>
+
+  <!-- AllOrders -->
   <v-container v-else>
+    <!-- Notification -->
     <template>
       <v-snackbar v-if="result" v-model="success" tile color="success">
         <v-icon left>mdi-check-circle</v-icon>
@@ -29,6 +37,8 @@
       </v-snackbar>
     </template>
     <v-row class="my-3"> </v-row>
+
+    <!-- OrderCards -->
     <v-row justify="center">
       <v-col
         v-for="order in allOrders"
@@ -36,35 +46,47 @@
         class="col-12 col-sm-7"
       >
         <v-card dark>
+          <!-- Order Details -->
           <div class="d-flex flex-no-wrap">
+            <!-- Ordered Item Image -->
             <v-avatar class="ma-3" size="120" tile>
               <v-img :src="order.product.image.url"></v-img>
             </v-avatar>
             <div>
+              <!-- Ordered Item Name -->
               <v-card-title class="text-sm-h5 mb-0 pb-0">
                 {{ order.product.name }}
               </v-card-title>
 
+              <!-- Ordered Item Price -->
               <v-card-subtitle class="my-0 py-0">
                 ₹ {{ order.product.price.toLocaleString() }}
               </v-card-subtitle>
+
+              <!-- Ordered Item quantity -->
               <v-card-subtitle class="py-0 my-0">
                 {{ order.quantity }} {{ order.quantity > 1 ? "Units" : "Unit" }}
               </v-card-subtitle>
+
+              <!-- User(Ordered By) Email -->
               <v-card-subtitle class="py-0 my-0">
                 Ordered by: {{ order.orderedBy.email }}
               </v-card-subtitle>
+
+              <!-- Order Date -->
               <v-card-subtitle class="py-0 my-0 grey--text">
                 Ordered On: {{ order.createdAt }}
               </v-card-subtitle>
             </div>
           </div>
           <v-divider></v-divider>
+
+          <!-- Order Status and Update Status Button  -->
           <div class="pa-2 d-flex align-center">
-            Order Status: 
-            <span 
+            Order Status:
+            <span
               :class="{
-                'pl-1':true,
+                'pl-1': true,
                 'blue--text': order.status === 'Pending',
                 'orange--text': order.status === 'Shipped',
                 'green--text': order.status === 'Delivered',

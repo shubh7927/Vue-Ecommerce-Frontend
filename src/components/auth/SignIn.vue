@@ -1,10 +1,18 @@
 <template>
-  <v-container fluid fill-height>
+  <!-- UnauthorisedAccess if User is already Logged in -->
+  <v-container v-if="isUserLoggedIn">
+    <UnauthorisedAccess />
+  </v-container>
+
+  <!-- Form If User is not logged in -->
+  <v-container v-else fluid fill-height>
     <v-layout align-center justify-center>
       <v-flex xs12 sm8 md4>
         <v-card class="elevation-12 py-5 px-5" dark>
           <v-card-text class="blue--text text--blue">
+            <!-- Form -->
             <v-form @submit.prevent="handleSignIn" ref="form" v-model="valid">
+              <!-- Email Field -->
               <v-text-field
                 v-model="credentials.email"
                 prepend-inner-icon="mdi-email"
@@ -13,11 +21,13 @@
                 type="email"
                 color="primary"
                 autocomplete="off"
+                :success="rules.email(credentials.email) == true"
                 :rules="[rules.required, rules.email]"
                 outlined
                 validate-on-blur
               ></v-text-field>
 
+              <!-- Password Field -->
               <v-text-field
                 v-model="credentials.password"
                 prepend-inner-icon="mdi-lock"
@@ -27,12 +37,15 @@
                 :type="visible ? 'text' : 'password'"
                 :append-icon="!visible ? 'mdi-eye' : 'mdi-eye-off'"
                 @click:append="visible = !visible"
+                :success="rules.minLength(credentials.password) == true"
                 :rules="[rules.required, rules.minLength]"
                 outlined
               ></v-text-field>
+
+              <!-- Sign In Button -->
               <v-btn
                 type="submit"
-                color="success"
+                color="purple"
                 :disabled="!valid"
                 block
                 depressed
@@ -41,6 +54,8 @@
               >
                 Sign In
               </v-btn>
+
+              <!-- Forgot Password and SignUp Link -->
               <div class="grey--text text-center mt-1">
                 <router-link
                   class="text-decoration-none"
@@ -64,6 +79,8 @@
         </v-card>
       </v-flex>
     </v-layout>
+
+    <!-- Notification -->
     <v-snackbar v-model="success" tile color="success">
       <v-icon left>mdi-check-circle</v-icon>
       Logged In Successfully.
@@ -77,8 +94,12 @@
 
 <script>
 import { isEmail } from "validator";
+import UnauthorisedAccess from "@/components/UnauthorisedAccess.vue";
 export default {
   name: "SignIn",
+  components: {
+    UnauthorisedAccess,
+  },
   data() {
     return {
       visible: false,

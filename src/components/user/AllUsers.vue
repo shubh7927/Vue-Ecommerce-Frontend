@@ -1,11 +1,17 @@
 <template>
+  <!-- UnauthorisedAccess for all Users Except SuperAdmin -->
   <v-container v-if="!(isUserLoggedIn && isSuperAdmin)">
     <UnauthorisedAccess />
   </v-container>
+
+  <!-- Error Message -->
   <v-container v-else-if="error" class="text-h5">
     {{ error.response.data }}
   </v-container>
+
+  <!-- SuperAdmin View -->
   <v-container v-else class="my-5">
+    <!-- Skeleton Loaders -->
     <v-row v-if="loading">
       <v-col v-for="n in 3" :key="n">
         <v-skeleton-loader
@@ -15,9 +21,12 @@
         ></v-skeleton-loader>
       </v-col>
     </v-row>
+
+    <!-- All Users Cards -->
     <v-row v-if="allUsers.length > 0">
       <v-col v-for="user in allUsers" :key="user._id">
         <v-card dark class="mx-auto" max-width="300">
+          <!-- User Profile Pic -->
           <v-card-title class="pb-0">
             <v-avatar size="50" color="purple">
               <img
@@ -28,6 +37,8 @@
               <span v-else>{{ user.fullName[0] }}</span>
             </v-avatar>
           </v-card-title>
+
+          <!-- User FullName with access badge -->
           <v-card-title class="pt-1 text-capitalize">
             {{ user.fullName }}
             <span
@@ -42,13 +53,17 @@
             </span>
           </v-card-title>
 
+          <!-- User Email -->
           <v-card-subtitle class="pb-0 white--text">
             {{ user.email }}
           </v-card-subtitle>
+
+          <!-- User Joined date -->
           <v-card-text class="pb-0 grey--text">
             Joined On {{ formatDate(user.joinedOn) }}
           </v-card-text>
 
+          <!-- UpdateUserAccess and DeleteUser Button -->
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn

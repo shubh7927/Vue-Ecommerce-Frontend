@@ -1,10 +1,18 @@
 <template>
-  <v-container fluid fill-height>
+  <!-- UnauthorisedAccess if User is already Logged in -->
+  <v-container v-if="isUserLoggedIn">
+    <UnauthorisedAccess />
+  </v-container>
+
+  <!-- Form If User is not logged in -->
+  <v-container v-else fluid fill-height>
     <v-layout align-center justify-center>
       <v-flex xs12 sm8 md4>
         <v-card class="elevation-12 py-5 px-5" dark>
           <v-card-text>
+            <!-- Form -->
             <v-form @submit.prevent="handleSignUp" ref="form" v-model="valid">
+              <!-- FullName Field -->
               <v-text-field
                 v-model="credentials.fullName"
                 prepend-inner-icon="mdi-account"
@@ -18,6 +26,8 @@
                 :success="rules.required(credentials.fullName) == true"
                 validate-on-blur
               ></v-text-field>
+
+              <!-- Email Field -->
               <v-text-field
                 v-model="credentials.email"
                 prepend-inner-icon="mdi-email"
@@ -35,6 +45,7 @@
                 validate-on-blur
               ></v-text-field>
 
+              <!-- Password Field -->
               <v-text-field
                 v-model="credentials.password"
                 prepend-inner-icon="mdi-lock"
@@ -50,6 +61,8 @@
                 "
                 validate-on-blur
               ></v-text-field>
+
+              <!-- Confirm Password Field -->
               <v-text-field
                 v-model="confirmPassword"
                 prepend-inner-icon="mdi-lock"
@@ -66,6 +79,8 @@
                 "
                 outlined
               ></v-text-field>
+
+              <!-- Profile Picture Field -->
               <v-file-input
                 v-model="credentials.picture"
                 prepend-icon=""
@@ -80,9 +95,11 @@
                 chips
               >
               </v-file-input>
+
+              <!-- SignUp Button -->
               <v-btn
                 type="submit"
-                color="success"
+                color="purple"
                 :disabled="!valid"
                 block
                 depressed
@@ -91,6 +108,8 @@
               >
                 Sign Up
               </v-btn>
+
+              <!-- SignIn Link -->
               <div class="grey--text text-center mt-1">
                 Already have an account? Sign in
                 <router-link
@@ -105,6 +124,8 @@
         </v-card>
       </v-flex>
     </v-layout>
+
+    <!-- Notification -->
     <v-snackbar v-model="success" tile color="success">
       <v-icon left>mdi-check-circle</v-icon>
       Accont Created Successfully.
@@ -118,8 +139,12 @@
 
 <script>
 import { isEmail, isStrongPassword } from "validator";
+import UnauthorisedAccess from "@/components/UnauthorisedAccess.vue";
 export default {
   name: "SignUp",
+  components: {
+    UnauthorisedAccess,
+  },
   data() {
     return {
       valid: false,
@@ -157,9 +182,7 @@ export default {
         this.failure = false;
         this.success = true;
         setTimeout(() => {
-          this.$router.push({
-            name: "home",
-          });
+          this.$router.go(-1);
         }, 1000);
       } catch (error) {
         this.error = error;

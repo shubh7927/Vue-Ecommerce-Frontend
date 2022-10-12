@@ -1,24 +1,31 @@
 <template>
+  <!-- UnauthorisedAccess if user is not admin or superadmin -->
   <v-container fluid v-if="!(isUserLoggedIn && (isAdmin || isSuperAdmin))">
     <UnauthorisedAccess />
   </v-container>
+
+  <!-- View For Admin or SuperAdmin -->
   <v-container fluid fill-height v-else>
     <v-layout align-center justify-center>
       <v-flex xs12 sm8 md4>
         <v-card class="elevation-12 py-5 px-5" dark>
           <v-card-text>
+            <!-- Form -->
             <v-form
               dark
               @submit.prevent="addProduct"
               ref="form"
               v-model="valid"
             >
+              <!-- ProductName Field -->
               <v-text-field
                 filled
                 label="Name"
                 v-model="product.name"
                 :rules="[rules.required]"
               ></v-text-field>
+
+              <!-- ProductPrice Field -->
               <v-text-field
                 filled
                 type="number"
@@ -26,6 +33,8 @@
                 v-model="product.price"
                 :rules="[rules.required]"
               ></v-text-field>
+
+              <!-- ProductCategory Field -->
               <v-select
                 filled
                 label="Category"
@@ -33,6 +42,8 @@
                 v-model="product.category"
                 :rules="[rules.required]"
               ></v-select>
+
+              <!-- ProductDescription Field -->
               <v-textarea
                 filled
                 row="3"
@@ -40,6 +51,8 @@
                 v-model="product.description"
                 :rules="[rules.required]"
               ></v-textarea>
+
+              <!-- ProductStock Field-->
               <v-text-field
                 filled
                 type="number"
@@ -47,6 +60,8 @@
                 v-model="product.stock"
                 :rules="[rules.required]"
               ></v-text-field>
+
+              <!-- ProductImage Field -->
               <v-file-input
                 filled
                 chips
@@ -59,15 +74,7 @@
               </v-file-input>
               <v-row>
                 <v-spacer></v-spacer>
-                <v-btn
-                  color="grey lighten-1"
-                  :disabled="!valid"
-                  @click="resetForm"
-                  plain
-                >
-                  Cancel
-                </v-btn>
-                <v-btn type="submit" color="success" :disabled="!valid" plain>
+                <v-btn type="submit" color="purple" :disabled="!valid" plain>
                   Add
                 </v-btn>
               </v-row>
@@ -76,6 +83,8 @@
         </v-card>
       </v-flex>
     </v-layout>
+
+    <!-- Notification -->
     <v-snackbar v-if="result" v-model="success" tile color="success">
       <v-icon left>mdi-check-circle</v-icon>
       {{ result.message }}
@@ -141,9 +150,6 @@ export default {
         this.error = error;
         this.failure = true;
       }
-    },
-    resetForm() {
-      this.$refs.form.reset();
     },
   },
 };

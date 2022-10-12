@@ -1,7 +1,10 @@
 <template>
+  <!-- UnauthorisedAccess for Non-SignedIn User -->
   <v-container v-if="!isUserLoggedIn">
     <UnauthorisedAccess />
   </v-container>
+
+  <!-- Loader -->
   <v-container class="fill-height" v-else-if="loading">
     <v-row class="fill-height" align-content="center" justify="center">
       <v-col cols="4">
@@ -14,6 +17,8 @@
       </v-col>
     </v-row>
   </v-container>
+
+  <!-- MyProfile Page -->
   <v-container fluid fill-height v-else>
     <v-layout align-center justify-center>
       <v-flex xs12 sm8 md4>

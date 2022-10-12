@@ -63,13 +63,18 @@
     </section>
 
     <!-- CTA Section -->
-    <v-row class="ctaSection d-flex flex-column align-center py-10 purple mt-5">
-      <h2 class="sectionHeading">Want a new Gadget?</h2>
-      <p>Hurry up!!! Place your order before you miss the deal.</p>
+    <v-container
+      fluid
+      class="ctaSection d-flex flex-column align-center py-10 purple mt-5"
+    >
+      <h2 class="sectionHeading py-0 my-0">Want a new Gadget?</h2>
+      <p class="pt-0 mt-0">
+        Hurry up!!! Place your order before you miss the deal.
+      </p>
       <v-btn depressed outlined color="white" :to="{ name: 'allProducts' }">
         Order Now
       </v-btn>
-    </v-row>
+    </v-container>
 
     <PageFooter />
   </main>
@@ -92,25 +97,25 @@ export default {
       reviews: [
         {
           customerName: "Dumbledore",
-          img: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6",
+          img: require("../assets/male1.png"),
           feedback:
             "Lorem ipsum dolor sit amet consectetur, libero tenetur excepturi non ullam .",
         },
         {
           customerName: "McGonical",
-          img: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91",
+          img: require("../assets/female1.png"),
           feedback:
             "Lorem ipsum dolor sit amet consectetur adipisicing perferendis alias, tempore ipsa ducimus magnam architecto.",
         },
         {
           customerName: "Snape",
-          img: "https://images.unsplash.com/photo-1582233479366-6d38bc390a08",
+          img: require("../assets/male2.png"),
           feedback:
             "Lorem ipsum dolor sit amet consectetur  totam perferendis alias, tempore ipsa ducimus magnam architecto.",
         },
         {
           customerName: "Hermione",
-          img: "https://images.unsplash.com/photo-1578774296842-c45e472b3028",
+          img: require("../assets/female2.png"),
           feedback:
             "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil autem, earum, libero teneturs magnam architecto.",
         },

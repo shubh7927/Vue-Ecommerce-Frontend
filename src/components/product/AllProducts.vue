@@ -1,5 +1,6 @@
 <template>
   <v-container class="my-5">
+    <!-- SearchBar -->
     <v-row class="searchBar">
       <v-text-field
         dark
@@ -12,6 +13,8 @@
         @keyup="handleSearchResults"
       ></v-text-field>
     </v-row>
+
+    <!-- Add Product Button (Admin and SuperaAdmin only) -->
     <v-row class="mb-4" v-if="isUserLoggedIn && (isAdmin || isSuperAdmin)">
       <v-spacer></v-spacer>
       <v-btn text color="purple" :to="{ name: 'addProduct' }">
@@ -19,6 +22,8 @@
         Add New Product
       </v-btn>
     </v-row>
+
+    <!-- Skeleton Loaders -->
     <v-row v-if="loading">
       <v-col v-for="n in 3" :key="n">
         <v-skeleton-loader
@@ -29,12 +34,23 @@
       </v-col>
     </v-row>
 
-    <v-snackbar v-if="error" v-model="snackbar" color="red">
+    <!-- Error Notification -->
+    <v-snackbar v-else-if="error" v-model="snackbar" color="red">
       <v-icon left>mdi-alert-circle</v-icon>
       {{ error.message }}
     </v-snackbar>
 
-    <v-row v-if="productDisplayList.length > 0">
+    <!-- NoProductsFound -->
+    <v-row
+      v-else-if="productDisplayList.length == 0"
+      class="text-h2 justify-center my-4"
+    >
+      No Products Found
+      <v-icon dark right class="text-h2">mdi-emoticon-sad-outline</v-icon>
+    </v-row>
+
+    <!-- Product Cards -->
+    <v-row v-else>
       <v-col v-for="product in productDisplayList" :key="product._id">
         <ProductCard
           :name="product.name"
@@ -46,19 +62,27 @@
         />
       </v-col>
     </v-row>
-    <v-row>
+
+    <!-- Pagination Buttons -->
+    <v-row v-if="productDisplayList.length > 0">
       <v-btn
         text
         dark
         color="purple"
         @click="handlePageDecrease"
-        :disabled="this.params.page == null"
+        :disabled="params.page == null"
       >
         <v-icon left>mdi-arrow-left</v-icon>
         Previous
       </v-btn>
       <v-spacer></v-spacer>
-      <v-btn color="purple" @click="handlePageIncrease" dark text>
+      <v-btn
+        color="purple"
+        @click="handlePageIncrease"
+        dark
+        text
+        :disabled="productDisplayList.length < 6"
+      >
         Next
         <v-icon right>mdi-arrow-right</v-icon>
       </v-btn>
@@ -141,8 +165,8 @@ export default {
     },
   },
   async mounted() {
-    this.loading = true;
     try {
+      this.loading = true;
       const response = await getProductsList(this.params);
       this.allProductsList = response.allProducts;
       this.productDisplayList = this.allProductsList;

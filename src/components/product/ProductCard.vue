@@ -1,12 +1,17 @@
 <template>
   <v-card dark class="mx-auto" max-width="300">
+    <!-- ProductImage -->
     <v-img height="300px" :src="imgLink"> </v-img>
 
+    <!-- ProductName -->
     <v-card-title>{{ name }}</v-card-title>
 
+    <!-- ProductPrice -->
     <v-card-subtitle class="pb-0">
       ₹ {{ price.toLocaleString() }}
     </v-card-subtitle>
+
+    <!-- ProductRating -->
     <v-rating
       dense
       half-increments
@@ -18,6 +23,7 @@
     >
     </v-rating>
 
+    <!-- ProductView Button -->
     <v-card-actions>
       <v-spacer></v-spacer>
       <v-btn
