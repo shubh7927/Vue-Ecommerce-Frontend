@@ -299,6 +299,9 @@ export default {
     async handleLogOut() {
       try {
         await this.$store.dispatch("logOut");
+        this.$router.push({
+          name:'home'
+        });
       } catch (error) {
         this.error = error;
       }
