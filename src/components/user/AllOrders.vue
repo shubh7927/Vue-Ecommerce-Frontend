@@ -75,7 +75,7 @@
 
               <!-- Order Date -->
               <v-card-subtitle class="py-0 my-0 grey--text">
-                Ordered On: {{ order.createdAt }}
+                Ordered On: {{ formatDate(order.createdAt) }}
               </v-card-subtitle>
             </div>
           </div>
@@ -122,6 +122,7 @@
 
 <script>
 import { mapGetters } from "vuex";
+import { format } from "date-fns";
 import { getAllOrders, setOrderStatus } from "@/services/orders";
 import UnauthorisedAccess from "@/components/UnauthorisedAccess.vue";
 export default {
@@ -143,6 +144,9 @@ export default {
     };
   },
   methods: {
+    formatDate(date) {
+      return format(new Date(date), "MMM dd, yyyy");
+    },
     async getAllOrders() {
       const tempArr = [];
       const response = await getAllOrders();
