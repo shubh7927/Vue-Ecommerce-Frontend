@@ -73,7 +73,7 @@
 
               <!-- Order date -->
               <v-card-subtitle class="py-0 my-0 grey--text">
-                Ordered On: {{ item.createdAt }}
+                Ordered On: {{ formatDate(item.createdAt) }}
               </v-card-subtitle>
             </div>
           </div>
@@ -110,6 +110,11 @@ export default {
   computed: {
     ...mapGetters(["isUserLoggedIn"]),
   },
+  methods: {
+    formatDate(date) {
+      return format(new Date(date), "MMM dd, yyyy");
+    },
+  },
   data() {
     return {
       orderItems: [],
@@ -141,5 +146,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>
